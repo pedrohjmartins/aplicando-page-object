@@ -1,5 +1,6 @@
 Dado('que o usuário esteja no formulário de cadastro') do
-  visit 'https://mark7.herokuapp.com/register'
+  @cadastro_page = CadastroPage.new
+  @cadastro_page.load
 end
 
 Dado('informe o seguinte dados:') do |table|
@@ -7,10 +8,7 @@ Dado('informe o seguinte dados:') do |table|
 end
 
 Quando('realizar o cadastro') do
-  find('#register_name').set @usuario[:nome]
-  find('#register_email').set @usuario[:email]
-  find('#register_password').set @usuario[:senha]
-  find('button[type=submit]').click
+  @cadastro_page.cadastrar(@usuario)
 end
 
 Então('usuário vê a seguinte mensagem: {string}') do |mensagem|
